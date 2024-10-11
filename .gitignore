@@ -1,3 +1,8 @@
+# keeping private
+.env
+.DS_Store
+__pycache__
+
 #ignore huggingface
 summarizeApp
 #ignore fine-tuning
