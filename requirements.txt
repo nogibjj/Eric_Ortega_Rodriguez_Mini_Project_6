@@ -10,3 +10,6 @@ ruff==0.0.284
 
 # For environment variable management
 python-dotenv==0.21.1
+
+
+databricks-sql-connector==2.7.0

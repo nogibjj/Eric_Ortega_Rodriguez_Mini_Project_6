@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
 from mylib.extract import extract
-from mylib.query import general_query
 from mylib.transform_load import load
+from mylib.query import general_query
 
 def main():
-    # Ensure that load_dotenv is called here
     load_dotenv()
 
     print("Extracting data....")
@@ -30,7 +29,6 @@ def main():
         ORDER BY 
             total_battles DESC, total_appearances DESC
     '''
-
     general_query(query)
 
 if __name__ == "__main__":
