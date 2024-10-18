@@ -1,23 +1,27 @@
 import os
 from databricks import sql
 from dotenv import load_dotenv
-import pandas as pd
 
-# global variable
+# Global variable for the log file
 LOG_FILE = "query_log.md"
 
 def log_query(query, result="none"):
-    """Adds to a query markdown file"""
+    """Adds to a query markdown file."""
     with open(LOG_FILE, "a") as file:
         file.write(f"```sql\n{query}\n```\n\n")
         if result != "none":
-            result_str = "\n".join([", ".join(map(str, row)) for row in result])
-            file.write(f"```response from databricks\n{result_str}\n```\n\n")
+            if isinstance(result, str):  # In case result is an error message
+                file.write(f"```response from databricks\n{result}\n```\n\n")
+            else:
+                result_str = "\n".join(
+                    [", ".join(map(str, row)) for row in result]
+                )
+                file.write(f"```response from databricks\n{result_str}\n```\n\n")
         else:
             file.write(f"```response from databricks\n{result}\n```\n\n")
 
 def general_query(query):
-    """Runs a query a user inputs and logs the result"""
+    """Runs a user-defined query and logs the result."""
     
     load_dotenv()
     server_hostname = os.getenv("server_host")
@@ -27,29 +31,12 @@ def general_query(query):
     result = "none"
     
     try:
-        # Connecting to Databricks
         with sql.connect(
             server_hostname=server_hostname,
             http_path=http_path,
-            access_token=access_token,
+            access_token=access_token
         ) as conn:
             with conn.cursor() as c:
-                query = '''
-                    SELECT 
-                        a."Name/Alias", 
-                        SUM(a.Appearances) AS total_appearances, 
-                        COUNT(b.battle_id) AS total_battles
-                    FROM 
-                        Avengers a
-                    JOIN 
-                        Battles b ON a.avenger_id = b.avenger_id
-                    GROUP BY 
-                        a."Name/Alias"
-                    HAVING 
-                        SUM(a.Appearances) > 100  -- Only Avengers with more than 100 appearances
-                    ORDER BY 
-                        total_battles DESC, total_appearances DESC
-                '''
                 c.execute(query)
                 result = c.fetchall()
                 
@@ -58,7 +45,6 @@ def general_query(query):
         print(f"Query execution failed: {str(e)}")
     
     log_query(query, result)
-
 
 # import sqlite3
 

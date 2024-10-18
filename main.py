@@ -1,4 +1,3 @@
-import os
 from dotenv import load_dotenv
 from mylib.extract import extract
 from mylib.query import general_query
@@ -15,7 +14,7 @@ def main():
     load()
 
     print("Querying data from Databricks...")
-    query =query = '''
+    query = '''
         SELECT 
             a.`Name/Alias`, 
             SUM(a.Appearances) AS total_appearances, 
@@ -30,13 +29,12 @@ def main():
             SUM(a.Appearances) > 100
         ORDER BY 
             total_battles DESC, total_appearances DESC
-'''
+    '''
 
     general_query(query)
 
 if __name__ == "__main__":
     main()
-
 
 
 
