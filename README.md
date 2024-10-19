@@ -16,7 +16,7 @@ This project implements a complex SQL query involving **joins**, **aggregation**
 
 3. **CI/CD Pipeline**: Implement a basic Continuous Integration/Continuous Deployment (CI/CD) pipeline that automatically runs tests and ensures the query executes without errors.
 
-4. **README**: This document explains the query, its purpose, and how to run it.
+4. **README**: This document explains the query, its purpose, and how to run it. It is also the one you are currently reading. 😄
 
 ---
 
@@ -63,32 +63,28 @@ Additionally, the query filters out any Avengers with fewer than 100 comic book 
    - The `JOIN` clause is used to link the two tables using the `avenger_id` field, which exists in both tables. This allows the query to combine information about each Avenger from the `Avengers` table with information about their participation in battles from the `Battles` table.
 
 2. **SELECT Clause**:
-   - `a.Name/Alias`: This selects the name or alias of the Avenger from the `Avengers` table.
+   - `a.Name/Alias`: Selects the name/alias of the Avenger from the `Avengers` table.
    - `SUM(a.Appearances) AS total_appearances`: This sums the number of comic book appearances for each Avenger. The `SUM()` function aggregates the values in the `Appearances` column for each Avenger.
    - `COUNT(b.battle_id) AS total_battles`: This counts the number of battles that each Avenger has participated in, based on the number of `battle_id` entries in the `Battles` table.
 
 3. **GROUP BY Clause**:
-   - The query groups the results by `a.Name/Alias`. This means that for each unique Avenger, it calculates the total appearances and battles.
-
+   - The query groups the results by `a.Name/Alias`
 4. **HAVING Clause**:
-   - The `HAVING` clause filters out Avengers who have appeared in fewer than 100 comic books. The query only returns Avengers with 100 or more appearances.
-   - This filter is applied after the aggregation, meaning that only Avengers with 100 or more total appearances (as calculated by the `SUM(a.Appearances)`) are included in the results.
+   - The `HAVING` clause filters out Avengers who have appeared in fewer than 100 comic books. The query only returns Avengers with 100 or more appearances (calculated by the `SUM(a.Appearances)`) are included in the results.
 
 5. **ORDER BY Clause**:
-   - The results are first sorted by `total_battles DESC`, meaning that Avengers with the highest number of battles are listed first.
-   - If two Avengers have the same number of battles, they are further sorted by `total_appearances DESC`, so Avengers with more appearances are listed higher.
+   - The results are first sorted by `total_battles DESC`, meaning that Avengers with the highest number of battles appear on the list first
 
-### Example Scenario:
+### For example:
 
-Let’s assume the `Avengers` table contains the following data:
+The `Avengers` table contains the following data:
 
 | avenger_id | Name/Alias      | Appearances |
 |------------|-----------------|-------------|
 | 1          | Iron Man        | 3000        |
 | 2          | Captain America | 2800        |
-| 3          | Black Widow     | 800         |
 
-And the `Battles` table contains:
+Then the `Battles` table contains:
 
 | battle_id | avenger_id |
 |-----------|------------|
@@ -98,11 +94,11 @@ And the `Battles` table contains:
 | 4         | 2          |
 | 5         | 3          |
 
-The query would:
-- Join these two tables using `avenger_id`.
-- Calculate that Iron Man has 3000 appearances and 2 battles, Captain America has 2800 appearances and 2 battles, and Black Widow has 800 appearances and 1 battle.
-- Filter out Black Widow since she has fewer than 100 comic book appearances.
-- Return Iron Man and Captain America, sorted by their number of battles and appearances.
+The query would do the following:
+- Join the two tables based on `avenger_id`
+- Calculate Iron Man has 3000 appearances and 2 battles, 
+- Calculates that Captain America has 2800 appearances and 2 battles
+- Return Iron Man and Captain America and would be sorted by their number of battles and appearances
 
 ### Expected Results:
 
@@ -111,8 +107,8 @@ The query would:
 | Iron Man        | 3000              | 2             |
 | Captain America | 2800              | 2             |
 
-In this case, the results show that both Iron Man and Captain America have fought in 2 battles, but Iron Man is listed first because he has more comic book appearances.
 
-### Summary:
+### In conclusion:
 
-This query provides valuable insights into the popularity and involvement of Avengers based on their battle history and overall comic book presence, prioritizing those with high participation in battles and appearances.
+This query allows us to gain insight into the involvement of different Avengers and take a closer look at how much prevalence they had within the comic universe and battles.
+

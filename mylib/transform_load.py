@@ -39,7 +39,6 @@ def load(dataset="data/avengers.csv", db_name="avengers.db", table_name="Avenger
         reader = csv.reader(csvfile)
         next(reader)  
         for row in reader:
-            # Adjust the INSERT statement to fit within the line length limit
             cursor.execute(
                 f"""
                 INSERT INTO {table_name} (
@@ -63,7 +62,7 @@ def test_transform_empty_data():
     """Test transform function with empty data."""
     data = []
     transformed_data = transform(data)
-    assert transformed_data == []  # Should return empty for empty input
+    assert transformed_data == []
 
 
 if __name__ == "__main__":
@@ -73,9 +72,9 @@ if __name__ == "__main__":
     from extract import extract
     data = extract(database="avengers.db", table="Avengers")
     
-    # Transformation
+
     transformed_data = transform(data)
 
-    # Transformed data
+
     for row in transformed_data:
         print(row)

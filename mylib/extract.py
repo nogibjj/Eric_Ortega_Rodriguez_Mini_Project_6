@@ -9,10 +9,10 @@ def extract(database="avengers.db", table="Avengers"):
     
     cursor.execute(f"SELECT * FROM {table}")
     
-    # Fetch all rows from the table
+    # Fetch rows
     results = cursor.fetchall()
     
-    # Close the connection
+    # Close connection
     conn.close()
 
     return results
@@ -57,20 +57,16 @@ def test_extract_empty_table():
     db_name = "empty_avengers.db"
     table_name = "Avengers"
     
-    # Create the database and empty table
     create_empty_table(database=db_name, table=table_name)
     
-    # Extract data from the empty table
     data = extract(database=db_name, table=table_name)
     
-    # Verify that the data is empty
-    assert len(data) == 0  # Expect no rows in an empty table
+    assert len(data) == 0  
 
 if __name__ == "__main__":
-    # Example of how to call the extract function and print the result
+
     data = extract(database="avengers.db", table="Avengers")
     for row in data:
         print(row)
 
-    # Run the test for extracting from an empty table
     test_extract_empty_table()
