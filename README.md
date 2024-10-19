@@ -1,16 +1,46 @@
-[![CI](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_5/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_5/actions/workflows/cicd.yml)
+[![CI](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_6/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_6/actions/workflows/cicd.yml)
 # Eric Ortega Rodriguez Mini Project 5
 
+# Complex SQL Query for MySQL Database
+
 ## Overview
-
-This project is part of our data engineering coursework that covers data operations involving SQL databases and Python. The focus of the project is to demonstrate the ability to connect to a SQL database, perform **CRUD** (Create, Read, Update, Delete) operations, and perform SQL queries. The project also includes a CI/CD pipeline to ensure that the operations work as expected, and it logs the results of successful database operations. The deliverables for the assignment are the Python script and a screenshot of my successful database operations (seen below). I used the avengers dataset which be found [here.](https://github.com/fivethirtyeight/data/tree/refs/heads/master/avengers)
-
-![alt text](image.png)
+This project implements a complex SQL query involving **joins**, **aggregation**, and **sorting** using an external database. The external database used in this project is [Databricks](https://databricks.com/), and the query fetches data from two related tables (`Avengers` and `Battles`) to calculate the total number of appearances and battles per Avenger.
 
 ## Requirements
-- Connect to a SQL database
-- Perform CRUD operations
-- Write at least two different SQL queries
+1. **SQL Query**: Design and implement a complex SQL query that:
+   - Joins data from multiple tables.
+   - Aggregates data to compute totals.
+   - Sorts the results based on specific criteria.
+
+2. **Explanation**: Provide detailed documentation explaining what the query does and the expected results.
+
+3. **CI/CD Pipeline**: Implement a basic Continuous Integration/Continuous Deployment (CI/CD) pipeline that automatically runs tests and ensures the query executes without errors.
+
+4. **README**: This document explains the query, its purpose, and how to run it.
+
+---
+
+## Query Explanation
+
+The following SQL query was designed for a **MySQL-compatible** database (Databricks in this case). It retrieves information about Avengers and their battle history, joining two tables (`Avengers` and `Battles`) to calculate the total number of battles each Avenger has participated in, as well as their total appearances in comics. The results are sorted by the number of battles and the number of appearances.
+
+### SQL Query:
+
+```sql
+SELECT 
+    a.`Name/Alias`, 
+    SUM(a.Appearances) AS total_appearances, 
+    COUNT(b.battle_id) AS total_battles
+FROM 
+    Avengers a
+JOIN 
+    Battles b ON a.avenger_id = b.avenger_id
+GROUP BY 
+    a.`Name/Alias`
+HAVING 
+    SUM(a.Appearances) > 100  -- Only Avengers with more than 100 appearances
+ORDER BY 
+    total_battles DESC, total_appearances DESC;
 
 ## Project Breakdown
 
