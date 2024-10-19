@@ -42,50 +42,7 @@ HAVING
 ORDER BY 
     total_battles DESC, total_appearances DESC;
 
-## Project Breakdown
-
 ```
-├── .devcontainer/
-│   ├── devcontainer.json
-│   └── Dockerfile
-│
-├── .github/
-│   └── workflows/
-│       └── cicd.yml
-│
-├── data/
-│   ├── avengers.csv
-│   ├── avengers.db
-│   ├── empty_avengers.db
-│   ├── image-1.png
-│   ├── image-2.png
-│   ├── image-3.png
-│   └── image-4.png
-│
-├── mylib/
-│   ├── __pycache__/
-│   │   ├── __init__.cpython-312.pyc
-│   │   ├── extract.cpython-312.pyc
-│   │   ├── query.cpython-312.pyc
-│   │   └── transform_load.cpython-312.pyc
-│   ├── __init__.py
-│   ├── extract.py
-│   ├── query.py
-│   └── transform_load.py
-│
-├── .gitignore
-├── Dockerfile
-├── image.png
-├── main.py
-├── Makefile
-├── README.md
-├── requirements.txt
-├── setup.sh
-├── test_main.py
-└── test_avengers.db
-
-```
-
 ## Deliverables 
 ### 1. SQL query
 ### 2. Written or video explanation of the query
